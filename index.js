@@ -35,6 +35,36 @@ app.post('/book/', (req,res)=>{
     }
 })
 
+
+app.delete('/delete/book/', (req,res)=>{
+    console.log(req.body)
+    const {del} = req.body
+    if (del) {
+    const ind = parseInt(del)
+    books.splice(ind,1)
+    console.log(books)
+    res.send('success')
+    }
+    else{
+        res.send('fail')
+    }
+})
+
+app.put('/put/book/', (req, res) => {
+    console.log(req.body)
+    const {p} = req.body
+    const {id} = req.body
+    let i = parseInt(id)
+    if (p && books[i]){
+        books[i] = p
+        console.log(books)
+        res.send('success')
+    } else{
+        res.send('fail')
+    }
+})
+
+
 app.listen(port,()=>{
     console.log('app is listening')
 })
